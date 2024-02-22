@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from "react-redux"
-import { resetVideogames } from "../../redux/actions";
+import { resetVideogames } from '../../../redux/actions';
 import './Reset.css'
 
 const Reset = () => {

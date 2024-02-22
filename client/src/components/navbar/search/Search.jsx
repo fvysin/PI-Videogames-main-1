@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { searchVideogame } from '../../redux/actions'
+import { searchVideogame } from '../../../redux/actions'
 import './Search.css'
 
 const Search = () => {

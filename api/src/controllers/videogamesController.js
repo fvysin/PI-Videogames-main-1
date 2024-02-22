@@ -11,7 +11,7 @@ const { API_KEY } = process.env
 const getVideogamesAPI = async () => {
     const allGames = []
     let page = 1
-    while (page <= 5) {
+    while (page <= 9) {
         let apiData = await axios.get(`${URL}?key=${API_KEY}&page=${page}`)
 
         apiData.data.results.map((game) => {
@@ -62,20 +62,38 @@ const getAllVideogames = async () => {
     return allVideogames
 }
 
+
+
 const createVideogameDB = async (name, description_raw, parent_platforms, background_image, released, rating, genres) => {
-    const gameDB = await Videogame.findAll({ where:{ name: name}})
-    if(gameDB.length != 0){
-        throw new Error(`${name} ya existe en la Base de Datos`)
+    const gameDB = await Videogame.findAll({ 
+        where: { 
+            name: name 
+        }});
+    if (gameDB.length != 0) {
+        throw new Error(`${name} ya existe en la Base de Datos`);
     }
     
-    const newGame = await Videogame.create({name, description_raw, parent_platforms, background_image, released, rating})
+    const newGame = await Videogame.create({
+        name,
+        description_raw,
+        parent_platforms,
+        background_image,
+        released,
+        rating
+    });
 
     const genresDB = await Genre.findAll({
-        where: {name: genres}
-    })
-    newGame.addGenre(genresDB)
-    return newGame
-} 
+        where: { 
+            name: genres 
+        }
+    });
+
+    await newGame.addGenres(genresDB);
+
+    return newGame;
+};
+
+
 
 const getVideogamesByName = async (name) => {
     const allVideogames = await getAllVideogames()
@@ -129,49 +147,5 @@ const getVideogameById = async (id, source) => {
 module.exports = { getAllVideogames, createVideogameDB, getVideogamesByName, getVideogameById }
 
 
-// {
-//     "name": "Minecraft",
-//     "description_raw": "Juego de construcción, supervivencia y aventura con la dinamica de que todo el esta basado en cubos",
-//     "parent_platforms": ["PC", "PlayStation", "Xbox"],
-//     "background_image": "https://www.minecraft.net/content/dam/games/minecraft/key-art/SUPM_Game-Image_One-Vanilla_672x400.jpg",
-//     "released": "2011-11-18",
-//     "rating": 5,
-//     "genres": ["Action", "Adventure", "RPG"]
-//   }
 
 
-
-
-// {
-//     "name": "FIFA 14",
-//     "description_raw": "Juego de futbol hambientado en la temporada 2013/2014",
-//     "parent_platforms": ["PlayStation", "Xbox"],
-//     "background_image": "https://i.blogs.es/527fd2/fifa-14-generacion-xbox-190717/1366_2000.jpg",
-//     "released": "2013-04-17",
-//     "rating": 5,
-//     "genres": ["Sports", "Strategy"]
-//   }
-
-
-
-
-// [
-//     {
-//       "id": 3498,
-//       "name": "Grand Theft Auto V",
-//       "background_image": "https://media.rawg.io/media/games/20a/20aa03a10cda45239fe22d035c0ebe64.jpg",
-//       "parent_platforms": [
-//         "PC",
-//         "PlayStation",
-//         "Xbox"
-//       ],
-//       "genres": [
-//         "Action",
-//         "Adventure"
-//       ],
-//       "createdDB": false
-//     },
-//     {
-//       "id": 3328,
-//       "name": "The Witcher 3: Wild Hunt",
-//       "background_image": "ht

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { updateFilter } from '../../redux/actions';
+import { updateFilter } from '../../../redux/actions';
 
 const Order = () => {
     const dispatch = useDispatch();
