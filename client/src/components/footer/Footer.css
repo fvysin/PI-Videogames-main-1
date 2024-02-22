@@ -1,0 +1,33 @@
+.footer {
+    background: linear-gradient(180deg, rgba(249, 249, 249, 0.15) 0%, rgba(249, 249, 249, 0.03) 100%);
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    box-shadow: 5px 5px 10px 0px #0000001A;
+}
+
+.footerContainer {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.img1 {
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+}
+
+.img2 {
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    background-color: azure;
+    border-radius: 3px;
+}
+
+.img3 {
+    width: 30px;
+    height: 31px;
+    margin: 5px;
+    border-radius: 3px;  
+}

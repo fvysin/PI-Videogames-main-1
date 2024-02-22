@@ -1,0 +1,28 @@
+.pgContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    .pgBoton {
+        border: none;
+        height: 40px;
+        background-color: rgb(173, 173, 173);
+        padding: 10px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+    }
+    .pgInput {
+        width: 10px;
+        height: 30px;
+        padding: 5px 25px;
+        border: 1px solid rgb(173, 173, 173);
+        border-radius: 3px;
+        text-align: center;
+    }
+    .pgP {
+        flex-direction:row;
+        text-align: center;
+    }
+}

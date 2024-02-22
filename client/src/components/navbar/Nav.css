@@ -1,0 +1,44 @@
+.containerNav{
+    background: linear-gradient(180deg, rgba(40, 189, 20, 0.15) 0%, rgba(0, 255, 115, 0.03) 100%);
+    padding: 30px;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 5px 5px 10px 0px #0b18121a;
+    display: flex;
+    margin-bottom: 25px;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+}
+
+.btn{
+    margin-left: 10px;
+    border-radius: 8px;
+    border: 1px solid black;
+    background: #F9F9F91A;
+    color: rgba(255, 255, 255, 0.788);;
+    height: 2rem;
+}
+.btn:hover{
+    background:#847a7ab8 ;
+}
+
+.imageLogo img {
+    width: 100px; /* Ajusta el valor según tus necesidades */
+    height: auto; /* Esto asegura que la altura se ajuste automáticamente según las proporciones originales */
+    padding-top: 30px;
+}
+/* .imageLogo {
+    
+    display: flex;
+gap: 15px;
+margin-left: 25px;
+align-items: center;
+width: 100px;
+    height: 100px;
+}
+
+img {
+    width: 300px;
+    height: 80px;
+} */
