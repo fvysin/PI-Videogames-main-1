@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { searchVideogame } from '../../../redux/actions'
+import { getVideogamesByName } from '../../../redux/actions'
 import './Search.css'
 
 const Search = () => {
@@ -15,7 +15,7 @@ const Search = () => {
 
     const handlerSubmit = (event) => {
         event.preventDefault()
-        dispatch(searchVideogame(game))
+        dispatch(getVideogamesByName(game))
         document.getElementById("search").value = ""
     }
 

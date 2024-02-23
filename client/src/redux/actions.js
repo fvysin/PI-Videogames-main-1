@@ -5,9 +5,10 @@ export const  allVideogames = () => {
     return async (dispatch) => {
         try {
             const response = await axios.get('http://localhost:3001/videogames')
+            const responseData= response.data
             dispatch({
                 type: GET_VIDEOGAMES,
-                payload: response.data
+                payload: responseData
             })
         } catch (error) {
             console.log(error.message)
@@ -19,9 +20,10 @@ export const  getVideogameById = (id) => {
     return async (dispatch) => {
         try {
             const response = await axios.get(`http://localhost:3001/videogames/${id}`)
+            const responseData= response.data
             dispatch({
                 type: GET_DETAIL,
-                payload: response.data
+                payload: responseData
             })
         } catch (error) {
             console.log(error.message)
@@ -41,13 +43,14 @@ export const  clearDetail = () => {
     }
 }
 
-export const  getVideogamesByName = (game) => {
+export const  getVideogamesByName = (name) => {
     return async (dispatch) => {
         try {
-            const response = await axios.get(`http://localhost:3001/videogames?name=${game}`)
+            const response = await axios.get(`http://localhost:3001/videogames?name=${name}`)
+            const responseData= response.data
             dispatch({
                 type: GET_BY_NAME,
-                payload: response.data
+                payload: responseData
             })
         } catch (error) {
             console.log(error.message)
@@ -59,9 +62,10 @@ export const  postVideogame = (state) => {
     return async (dispatch) => {
         try {
             const response = await axios.post('http://localhost:3001/videogames', state)
+            const responseData= response.data
             dispatch({
                 type: POST_VIDEOGAME,
-                payload: response.data
+                payload: responseData
             })
         } catch (error) {
             console.log(error.message)
@@ -73,9 +77,10 @@ export const  getGenres = () => {
     return async (dispatch) => {
         try {
             const response = await axios.get('http://localhost:3001/genres')
+            const responseData= response.data
             dispatch({
                 type: GET_GENRES,
-                payload: response.data
+                payload: responseData
             })
         } catch (error) {
             console.log(error.message)

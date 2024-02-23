@@ -88,7 +88,13 @@ const rootReducer = (state = initialState, action) => {
         case RESET:
         return {
             ...state,
-            allVideogames: state.allVideogamesBackUp,
+            // allVideogames: state.allVideogamesBackUp,
+            filters: { 
+                genre: 'All genres',     
+                order: 'name',  
+                rating: '', 
+                source: ''
+            }
         }
         
         default: 
