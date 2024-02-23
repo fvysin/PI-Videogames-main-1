@@ -24,7 +24,9 @@ const getVideogamesAPI = async () => {
                 genres: game.genres.map((genre) => genre.name).join(', '),
                 createdDB: false
             })
+            
         })
+        // console.log(apiData.data.results);
         page++
     }
     return allGames
@@ -52,6 +54,7 @@ const getVideogamesDB = async () => {
         createdDB: game.createdDB,
         genres: game.Genres.map((gen) => gen.name).join(', ')
     }))
+    // console.log(result)
     return result
 }
 
@@ -98,7 +101,9 @@ const createVideogameDB = async (name, description_raw, parent_platforms, backgr
 const getVideogamesByName = async (name) => {
     const allVideogames = await getAllVideogames()
     const gameFiltered = allVideogames.filter((game) => game.name.toLowerCase().includes(name.toLowerCase()))
-    if(!gameFiltered.length) throw Error(`No se encontraron resultados con el nombre: ${name}`)
+    if(!gameFiltered.length) {
+        throw Error(`No se encontraron resultados con el nombre: ${name}`)
+    }
     return gameFiltered.slice(0, 15)
 }
 

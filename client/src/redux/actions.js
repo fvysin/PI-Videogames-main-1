@@ -1,4 +1,4 @@
-import { CLEAR_DETAIL, GET_DETAIL, GET_VIDEOGAMES, SEARCH_VIDEOGAME, POST_VIDEOGAME, GET_GENRES, FILTER, RESET } from "./actionsType"
+import { CLEAR_DETAIL, GET_DETAIL, GET_VIDEOGAMES, GET_BY_NAME, POST_VIDEOGAME, GET_GENRES, FILTER, RESET } from "./actionsType"
 import axios from 'axios'
 
 export const  allVideogames = () => {
@@ -41,12 +41,12 @@ export const  clearDetail = () => {
     }
 }
 
-export const  searchVideogame = (game) => {
+export const  getVideogamesByName = (game) => {
     return async (dispatch) => {
         try {
             const response = await axios.get(`http://localhost:3001/videogames?name=${game}`)
             dispatch({
-                type: SEARCH_VIDEOGAME,
+                type: GET_BY_NAME,
                 payload: response.data
             })
         } catch (error) {
