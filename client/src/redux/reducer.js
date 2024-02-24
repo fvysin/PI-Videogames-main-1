@@ -89,12 +89,14 @@ const rootReducer = (state = initialState, action) => {
         return {
             ...state,
             // allVideogames: state.allVideogamesBackUp,
-            filters: { 
-                genre: 'All genres',     
-                order: 'name',  
-                rating: '', 
-                source: ''
-            }
+
+            // filters: { 
+            //     genre: '',     
+            //     order: '',  
+            //     rating: '', 
+            //     source: ''
+            // }
+            detail: action.payload
         }
         
         default: 

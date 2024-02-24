@@ -23,7 +23,7 @@ const FilterGenres = () => {
         <div className='container'>
             {console.log(select)} 
             <select name="genres" id="genres" onChange={handlerFilter} value={select}>
-            <option value="">All genres</option>
+            <option value="">Por género</option>
                 {allGenres.map(temp => <option key={temp} value={temp}>{temp}</option>)}
             </select>
         </div>

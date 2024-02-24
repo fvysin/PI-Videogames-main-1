@@ -6,8 +6,8 @@ import './Reset.css'
 const Reset = () => {
     const dispatch = useDispatch();
 
-    const handlerReset = () => {
-        dispatch(resetVideogames());
+    const handlerReset = (e) => {
+        dispatch(resetVideogames(e.target.name));
     }   
     
     return (

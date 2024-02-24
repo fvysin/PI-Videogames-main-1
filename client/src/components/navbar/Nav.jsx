@@ -1,12 +1,12 @@
 import React from 'react'
 import Search from '../navbar/search/Search'
 import {  useNavigate } from 'react-router-dom';
-import FilterSource from '../navbar/filterSource/FilterSource';
-import FilterGenres from '../navbar/filterGenres/FilterGenres';
-import Order from '../navbar/order/Order';
-import Reset from '../navbar/reset/Reset';
+import FilterSource from '../filters/filterSource/FilterSource';
+import FilterGenres from '../filters/filterGenres/FilterGenres';
+import Order from '../filters/order/Order';
+import Reset from '../filters/reset/Reset';
 import './Nav.css'
-import Ratings from '../navbar/ratings/Ratings';
+import Ratings from '../filters/ratings/Ratings';
 
 const Nav = () => {
 
