@@ -16,7 +16,7 @@ const Order = () => {
     return (
         <div>
             <select name="order" id="order" onChange={handleOrder} value={orderName}>
-                <option value="">Por Orden</option>
+                <option value="all">Orden</option>
                 <option value="AscendenteNombre">A-Z{" "}</option>
                 <option value="DescendenteNombre">Z-A{" "}</option>
             </select>

@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+// import { useSelector } from 'react-redux'
 import './Pagination.css'
 
 const Pagination = ({ pagina, setPagina, maximo }) => {
     const [input, setInput] = useState(1)
+    // const currentPageNumber = useSelector(state => state.currentPageNumber);
 
     const nextPage = () => {
         setInput(input + 1)
@@ -13,6 +15,11 @@ const Pagination = ({ pagina, setPagina, maximo }) => {
         setInput(input - 1)
         setPagina(pagina - 1)
     }
+
+    useEffect(() => {
+        setInput(pagina);
+    }, [pagina]);
+
 
     const onKeyDown = (event) => {
         if (event.keyCode === 13) {
@@ -37,11 +44,28 @@ const Pagination = ({ pagina, setPagina, maximo }) => {
     let m = Math.ceil(maximo)
     return (
         <div className='pgContainer' >
-            {console.log(m)}
-            <button disabled={pagina === 1 || pagina < 1} onClick={previousPage} className='pgBoton' > ◀️ </button>
-            <input onChange={(event) => onChange(event)} onKeyDown={(event) => onKeyDown(event)} name='page' autoComplete='off' value={input} className='pgInput'/>
+            {/* {console.log(m)} */}
+            <button 
+            disabled={pagina === 1 || pagina < 1} 
+            onClick={previousPage} 
+            className='pgBoton' > ◀️ 
+            </button>
+     
+            <input 
+            onChange={(event) => onChange(event)} 
+            onKeyDown={(event) => onKeyDown(event)} 
+            name='page' 
+            autoComplete='off' 
+            value={input} 
+            className='pgInput'
+            />
+
             <p className='pgP'> de {m} paginas </p>
-            <button disabled={pagina === Math.ceil(maximo) || pagina > Math.ceil(maximo)} onClick={nextPage} className='pgBoton'> ▶️ </button>
+            <button 
+            disabled={pagina === Math.ceil(maximo) || pagina > Math.ceil(maximo)} 
+            onClick={nextPage} 
+            className='pgBoton'> ▶️ 
+            </button>
         </div>
     )
 }
