@@ -203,14 +203,14 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 allVideogames: filteredResult,
                 filters: filters,
-                currentPageNumber: 1 // Cambiar a currentPageNumber
+                currentPageNumber: 1 
             }
 
         case RESET:
             return {
                 ...state,
                 allVideogames: [...state.allVideogamesBackUp],
-                currentPageNumber: 1, // Cambiar a currentPageNumber
+                currentPageNumber: 1, 
                 filters: { 
                     genre: 'all',     
                     order: 'name',  

@@ -1,6 +1,6 @@
 // Nav.jsx
 import React from 'react'
-import Search from '../navbar/search/Search'
+import Search from './search/Search'
 import {  useNavigate } from 'react-router-dom';
 import FilterSource from '../filters/filterSource/FilterSource';
 import FilterGenres from '../filters/filterGenres/FilterGenres';

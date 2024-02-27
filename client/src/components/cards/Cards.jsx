@@ -12,7 +12,7 @@ import Loading from '../loading/Loading'
 const Cards = () => {
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
-  const { pagina, setPagina } = usePagination(); // Aquí obtenemos pagina y setPagina del contexto
+  const { pagina, setPagina } = usePagination(); 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,7 +39,8 @@ const Cards = () => {
             {allVideogame.slice(
               (pagina - 1) * porPagina,
               (pagina - 1) * porPagina + porPagina
-            ).map(game => <Card key={game.id} info={game}/>)}
+            ).map(game => 
+            <Card key={game.id} info={game}/>)}
           </div>
           <div className='paginationContainer'>
             <Pagination pagina={pagina} setPagina={setPagina} maximo={maximo} />

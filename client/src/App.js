@@ -1,10 +1,10 @@
 import './App.css';
 import { Route, Routes } from'react-router-dom'
 import Landing from './components/landing/Landing.jsx';
-import Home from './components/home/Home';
-import Detail from './components/detail/Detail';
-import Form from './components/form/Form';
-import ErrorPage from './components/errorPage/ErrorPage';
+import Home from './components/home/Home.jsx';
+import Detail from './components/detail/Detail.jsx';
+import Form from './components/form/Form.jsx';
+import ErrorPage from './components/errorPage/ErrorPage.jsx';
 
 function App() {
 
