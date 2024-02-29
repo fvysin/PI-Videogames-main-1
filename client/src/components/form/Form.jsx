@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Form.css'
 import {  useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
-import { getGenres, postVideogame, allVideogames } from '../../redux/actions';
+import { getAllGenres, postVideogame, allVideogames } from '../../redux/actions';
 import validation from './validations';
 
 
@@ -19,7 +19,7 @@ const Form = () => {
   }, [])
 
   useEffect(() => {
-    dispatch(getGenres())
+    dispatch(getAllGenres())
   }, [])
 
   const allPlatafor = allVideogame.map((game) => game.parent_platforms)

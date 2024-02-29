@@ -1,4 +1,4 @@
-import { CLEAR_DETAIL, GET_DETAIL, GET_VIDEOGAMES, GET_BY_NAME, POST_VIDEOGAME, GET_GENRES, FILTER, RESET } from "./actionsType"
+import { CLEAR_DETAIL, GET_DETAIL, GET_VIDEOGAMES, GET_BY_NAME, POST_VIDEOGAME, GET_GENRES, FILTER, RESET, PAGINATE, RESET_PAGE } from "./actions-type"
 import axios from 'axios'
 
 export const  allVideogames = () => {
@@ -73,7 +73,7 @@ export const  postVideogame = (state) => {
     }
 }
 
-export const  getGenres = () => {
+export const  getAllGenres = () => {
     return async (dispatch) => {
         try {
             const response = await axios.get('http://localhost:3001/genres')
@@ -100,3 +100,17 @@ export const  resetVideogames = () => {
         type: RESET,
     }
 }
+
+export function page (order){
+    return function (dispatch){
+           dispatch({
+                type:PAGINATE,
+                payload:order
+           })
+        }
+    }
+
+
+    export const resetPage = () => ({
+        type: RESET_PAGE,
+    });

@@ -14,6 +14,18 @@ const Cards = () => {
   const dispatch = useDispatch()
   const { pagina, setPagina } = usePagination(); 
 
+  const [searchValue, setSearchValue]= useState("")
+
+
+  const handleHomeClick = () => {
+    // Limpiar el término de búsqueda al hacer clic en "Home"
+    setSearchValue("");
+    dispatch(allVideogames());
+    setPagina(1);
+  };
+
+
+
   useEffect(() => {
     const fetchData = async () => {
       await dispatch(allVideogames());
@@ -43,7 +55,7 @@ const Cards = () => {
             <Card key={game.id} info={game}/>)}
           </div>
           <div className='paginationContainer'>
-            <Pagination pagina={pagina} setPagina={setPagina} maximo={maximo} />
+            <Pagination pagina={pagina} setPagina={setPagina} maximo={maximo} onClick={handleHomeClick}/>
           </div>
         </div>
       )}
@@ -52,3 +64,7 @@ const Cards = () => {
 }
 
 export default Cards
+
+
+
+

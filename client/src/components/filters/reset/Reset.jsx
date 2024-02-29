@@ -12,6 +12,7 @@ const Reset = () => {
         dispatch(resetVideogames());
         // setPagina(1)
     }
+
      
     
     return (
@@ -24,3 +25,4 @@ const Reset = () => {
 
 
 export default Reset
+

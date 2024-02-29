@@ -42,6 +42,9 @@ const Pagination = ({ pagina, setPagina, maximo }) => {
     }
 
     let m = Math.ceil(maximo)
+
+
+    
     return (
         <div className='pgContainer' >
             {/* {console.log(m)} */}

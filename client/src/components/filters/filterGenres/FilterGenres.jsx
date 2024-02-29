@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { updateFilter, getGenres } from '../../../redux/actions';
+import { updateFilter, getAllGenres } from '../../../redux/actions';
 import './FilterGenres.css'
 
 const FilterGenres = () => {
     const dispatch = useDispatch()
-    const [select, setSelect] = useState('')
+    const [select, setSelect] = useState('all')
 
     useEffect(() => {
-        dispatch(getGenres())
+        dispatch(getAllGenres())
         setSelect('all')
     }, [dispatch])
 

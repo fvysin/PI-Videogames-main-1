@@ -5,7 +5,7 @@ import { updateFilter } from '../../../redux/actions';
 const Order = () => {
     const dispatch = useDispatch();
 
-    const [orderName, setOrdenName] = useState('')
+    const [orderName, setOrdenName] = useState('all')
 
     const handleOrder = (event) => {
     const order = event.target.value;

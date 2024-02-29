@@ -5,7 +5,7 @@ import { updateFilter } from '../../../redux/actions';
 const Ratings = () => {
     const dispatch = useDispatch()
 
-    const [orderRating, setOrderRating] = useState('')
+    const [orderRating, setOrderRating] = useState('all')
 
     
 

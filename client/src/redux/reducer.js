@@ -1,140 +1,25 @@
-// import { GET_VIDEOGAMES, GET_GENRES, GET_DETAIL, CLEAR_DETAIL, GET_BY_NAME, FILTER, RESET } from "./actionsType"
-
-// let initialState = {
-//     allVideogames: [],
-//     allVideogamesBackUp: [],
-//     allGenres: [],
-//     detail: {},
-//     filters: {
-//         genre: '',     
-//         order: 'name',  
-//         rating: '', 
-//         source: ''
-//     }
-// }
-
-// const rootReducer = (state = initialState, action) => {
-//     switch(action.type){
-
-//         case GET_VIDEOGAMES:
-//             return {
-//                 ...state,
-//                 allVideogames: [...action.payload],
-//                 allVideogamesBackUp: [...action.payload]
-//             }
-
-//         case GET_GENRES:
-//             return {
-//                 ...state,
-//                 allGenres: action.payload
-//             }    
-
-//         case GET_DETAIL:
-//             return {
-//                 ...state,
-//                 detail: action.payload
-//             }
-
-//         case CLEAR_DETAIL:
-//             return {
-//                 ...state,
-//                 detail: {}
-//             }
-
-//         case GET_BY_NAME:
-//             return {
-//                 ...state,
-//                 allVideogames: action.payload
-//             }   
-
-//         case FILTER:
-//             const { filterType, value} = action.payload
-        
-//             let filters = { ...state.filters, [filterType]: value }
-//             let filteredResult = [...state.allVideogamesBackUp]
-        
-//             //origin
-//             if(filters.source === 'API'){
-//                 filteredResult = filteredResult.filter((game)=> game.createdDB === false )
-//             }else if(filters.source === 'DB'){
-//                 filteredResult = filteredResult.filter((game)=> game.createdDB === true )
-//             }
-//             //genre
-//             if (filters.genre) {
-//                 filteredResult = filteredResult.filter((game) =>
-//                     game.genres.includes(filters.genre)
-//                 )
-//             }
-//             //order
-//             if (filters.order === "AscendenteNombre") {
-//                 filteredResult.sort((a, b) => a.name.localeCompare(b.name))
-//             }
-//             if (filters.order === "DescendenteNombre") {
-//                 filteredResult.sort((a, b) => b.name.localeCompare(a.name))
-//             }
-//             //rating
-//             if (filters.rating === "AscRating") {
-//                 filteredResult.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating))
-//             }
-//             if (filters.rating === "DescRating") {
-//                 filteredResult.sort((a, b) => parseFloat(a.rating) - parseFloat(b.rating))
-//             }
-
-//             return {
-//                 ...state,
-//                 allVideogames: filteredResult,
-//                 filters: filters,
-//             }
-
-//         case RESET:
-//         return {
-//             ...state,
-//             allVideogames: [...state.allVideogamesBackUp],
-
-//             filters: { 
-//                 genre: "all",     
-//                 order: 'name',  
-//                 rating: "all", 
-//                 source: "all"
-//             }
-//             // detail: action.payload
-//         }
-        
-//         default: 
-//             return state
-//     }
-// }
-
-// export default rootReducer
 
 
 
-
-
-
-// rootReducer.js
-
-
-
-
-
-import { GET_VIDEOGAMES, GET_GENRES, GET_DETAIL, CLEAR_DETAIL, GET_BY_NAME, FILTER, RESET } from "./actionsType";
+import { GET_VIDEOGAMES, GET_GENRES, GET_DETAIL, CLEAR_DETAIL, GET_BY_NAME, FILTER, RESET,PAGINATE, RESET_PAGE } from "./actions-type";
 
 const initialState = {
     allVideogames: [],
     allVideogamesBackUp: [],
     allGenres: [],
     detail: {},
-    currentPageNumber: 1, // Cambiar a currentPageNumber
-    filters: {
-        genre: '',     
-        order: 'name',  
-        rating: '', 
-        source: ''
-    }
+    currentPageNumber: 0, 
+    videogamesFiltered: [],
+    filters: false
+        // genre: '',     
+        // order: 'name',  
+        // rating: '', 
+        // source: ''
+    
 }
 
 const rootReducer = (state = initialState, action) => {
+    const cardsPerPage=15;
     switch(action.type){
 
         case GET_VIDEOGAMES:
@@ -202,8 +87,8 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 allVideogames: filteredResult,
-                filters: filters,
-                currentPageNumber: 1 
+                currentPageNumber: 0, 
+                filters:false
             }
 
         case RESET:
@@ -211,14 +96,49 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 allVideogames: [...state.allVideogamesBackUp],
                 currentPageNumber: 1, 
-                filters: { 
-                    genre: 'all',     
-                    order: 'name',  
-                    rating: 'all', 
-                    source: 'all'
-                }
+                filters: false,
+                videogamesFiltered:[]
+                // { 
+                    // genre: 'all',     
+                    // order: 'name',  
+                    // rating: 'all', 
+                    // source: 'all'
+                    
+                // }
+            }
+            case RESET_PAGE:
+                return {
+                    ...state,
+                    currentPageNumber: 1, // Restablecer la página a 1
+                };
+            
+        
+            case PAGINATE:
+            const next_page = state.currentPage + 1;
+            const prev_page = state.currentPage - 1;
+            const FirstIndex = action.payload === "next" ? next_page * cardsPerPage : prev_page * cardsPerPage;
+        
+            if (state.filters) {
+                if (action.payload === "next" && FirstIndex >= state.videogamesFiltered.length) return state;
+                else if (action.payload === "prev" && prev_page < 0) return state;
+
+                return {
+                    ...state,
+                    allVideogames: [...state.videogamesFiltered].splice(FirstIndex, cardsPerPage),
+                    currentPage: action.payload === "next" ? next_page : prev_page,
+                    currentPageNumber: action.payload === "next" ? state.currentPageNumber + 1 : state.currentPageNumber - 1
+                };
             }
         
+            if (action.payload === "next" && FirstIndex >= state.allVideogamesBackUp.length) return state;
+            else if (action.payload === "prev" && prev_page < 0) return state;
+        
+            return {
+                ...state,
+                allVideogames: [...state.allVideogamesBackUp].splice(FirstIndex, 15),
+                currentPage: action.payload === "next" ? next_page : prev_page,
+                currentPageNumber: action.payload === "next" ? state.currentPageNumber + 1 : state.currentPageNumber - 1
+            };
         default: 
             return state
     }

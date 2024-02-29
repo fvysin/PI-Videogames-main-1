@@ -1,0 +1,24 @@
+export const GET_VIDEOGAMES = "GET_VIDEOGAMES"
+export const GET_DETAIL = "GET_DETAIL"
+export const CLEAR_DETAIL = "CLEAR_DETAIL"
+export const GET_BY_NAME = "GET_BY_NAME"
+export const POST_VIDEOGAME = "POST_VIDEOGAME"
+export const GET_GENRES = "GET_GENRES"
+export const FILTER = "FILTER"
+export const RESET = "RESET"
+export const RESET_PAGE = "RESET_PAGE"
+export const PAGINATE = "PAGINATE"
+
+// export const GET_ALL_VIDEOGAMES = "GET_ALL_VIDEOGAMES";
+// export const GET_VIDEOGAME_BY_NAME = "GET_VIDEOGAME_BY_NAME";
+// export const GET_VIDEOGAME_DETAIL = "GET_VIDEOGAME_DETAIL";
+// export const POST_VIDEOGAME = "POST_VIDEOGAME";
+// export const CLEAR_VIDEOGAME_DETAIL = "CLEAR_VIDEOGAME_DETAIL";
+// export const GET_ALL_GENRES = "GET_ALL_GENRES";
+// export const GET_ALL_PLATFORMS = "GET_ALL_PLATFORMS";
+// export const FILTER_BY_GENRE = "FILTER_BY_GENRE";
+// export const FILTER_BY_CREATION = "FILTER_BY_CREATION";
+// export const ORDER_BY_NAME = "ORDER_BY_NAME";
+// export const ORDER_BY_RATING = "ORDER_BY_RATING";
+// export const PAGINATE = "PAGINATE"; 
+// export const RESET = "RESET";
