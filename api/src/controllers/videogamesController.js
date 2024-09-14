@@ -21,7 +21,7 @@ const getVideogamesAPI = async () => {
                 background_image: game.background_image,
                 rating: game.rating,
                 parent_platforms: game.parent_platforms.map(item => item.platform.name).join(', '),
-                genres: game.genres.map((genre) => genre.name).join(', '),
+                genres: game.Genres.map((obj) => obj.name),
                 createdDB: false
             })
             
@@ -52,7 +52,7 @@ const getVideogamesDB = async () => {
         released: game.released,
         rating: game.rating,
         createdDB: game.createdDB,
-        genres: game.Genres.map((gen) => gen.name).join(', ')
+        genres: game.Genres.map((obj) => obj.name)
     }))
     // console.log(result)
     return result
@@ -119,7 +119,7 @@ const getVideogameById = async (id, source) => {
             background_image: respID.data.background_image,
             released: respID.data.released,
             rating: respID.data.rating,
-            genres: respID.data.genres.map((genre) => genre.name).join(', '),
+            genres: respID.Genres.map((obj) => obj.name),
             createdDB: false
         }
         return gameID
@@ -142,7 +142,8 @@ const getVideogameById = async (id, source) => {
             background_image: gameID.background_image,
             released: gameID.released,
             rating: gameID.rating,
-            genres: result.join(', '),
+            genres: gameID.Genres.map((obj) => obj.name),
+
             createdDB: true
         }
         return game

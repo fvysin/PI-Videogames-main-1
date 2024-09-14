@@ -1,0 +1,68 @@
+.filters_container{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.filters_container h2 {
+    color: rgba(249, 248, 248, 0.862);
+    font-weight: 500;
+    font-size: 1.7em;
+}
+
+.filters_container label {
+    display: block;
+    color: rgba(249, 248, 248, 0.862);
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: 300;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em;
+}
+
+.filters_container select {
+    width: 9vw;
+    height: 3vh;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.493);
+    color: rgba(249, 248, 248, 0.862);
+    border-radius: 4px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+}
+
+.reset_all {
+    width: 9vw;
+    height: 3vh;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.493);
+    color: rgba(249, 248, 248, 0.862);
+    border-radius: 4px;
+}
+
+.reset_all:hover {
+    height: 3.5vh;
+    width: 9.5vw;
+    box-shadow: 0px 4px 25px 5px rgba(95, 17, 110, 0.873);
+    animation: button 1s linear infinite;
+}
+
+@keyframes button {
+    0% {
+        box-shadow: 0px 0px 15px 5px rgba(95, 17, 110, 0.5); 
+    }
+    50% {
+        box-shadow: 0px 0px 25px 10px rgba(95, 17, 110, 0.8); 
+    }
+    100% {
+        box-shadow: 0px 0px 15px 5px rgba(95, 17, 110, 0.5); 
+    }
+}
+
+.reset_all:active {
+    color: aliceblue;
+    height: 3.7vh;
+    width: 9.9vw;
+} 

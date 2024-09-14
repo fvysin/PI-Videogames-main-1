@@ -1,7 +1,7 @@
 
 
 
-import { GET_VIDEOGAMES, GET_GENRES, GET_DETAIL, CLEAR_DETAIL, GET_BY_NAME, FILTER, RESET,PAGINATE, RESET_PAGE } from "./actions-type";
+import { GET_VIDEOGAMES, GET_GENRES, GET_DETAIL, CLEAR_DETAIL, GET_BY_NAME, FILTER, RESET,PAGINATE, RESET_PAGE, ORDER_BY_NAME, ORDER_BY_RATING, FILTER_BY_CREATION, FILTER_BY_GENRE } from "./actions-type";
 
 const initialState = {
     allVideogames: [],
@@ -53,43 +53,142 @@ const rootReducer = (state = initialState, action) => {
                 allVideogames: action.payload
             }   
 
-        case FILTER:
-            const { filterType, value} = action.payload;
-            let filters = { ...state.filters, [filterType]: value };
-            let filteredResult = [...state.allVideogamesBackUp];
+        // case FILTER:
+        //     const { filterType, value} = action.payload;
+        //     let filters = { ...state.filters, [filterType]: value };
+        //     let filteredResult = [...state.allVideogamesBackUp];
 
-            // Filtrar por género
-            if (filters.genre && filters.genre !== 'all') {
-                filteredResult = filteredResult.filter((game) => game.genres.includes(filters.genre));
-            }
+        //     // Filtrar por género
+        //     if (filters.genre && filters.genre !== 'all') {
+        //         filteredResult = filteredResult.filter((game) => game.genres.includes(filters.genre));
+        //     }
 
-            // Aplicar ordenamiento
-            if (filters.order === 'AscendenteNombre') {
-                filteredResult.sort((a, b) => a.name.localeCompare(b.name));
-            } else if (filters.order === 'DescendenteNombre') {
-                filteredResult.sort((a, b) => b.name.localeCompare(a.name));
-            }
+            
+        //     // Filtrar por valoración
+        //     if (filters.rating && filters.rating !== 'all') {
+        //         filteredResult = filteredResult.filter((game) => game.rating === filters.rating);
+        //     }
+            
+        //     // Filtrar por origen
+        //     if (filters.source && filters.source !== 'all') {
+        //         if (filters.source === 'API') {
+        //             filteredResult = filteredResult.filter((game) => !game.createdDB);
+        //         } else if (filters.source === 'DB') {
+        //             filteredResult = filteredResult.filter((game) => game.createdDB);
+        //         }
+        //     }
+        //     // Aplicar ordenamiento
+        //     if (filters.order === 'AscendenteNombre') {
+        //         filteredResult.sort((a, b) => a.name.localeCompare(b.name));
+        //     } else if (filters.order === 'DescendenteNombre') {
+        //         filteredResult.sort((a, b) => b.name.localeCompare(a.name));
+        //     }
 
-            // Filtrar por valoración
-            if (filters.rating && filters.rating !== 'all') {
-                filteredResult = filteredResult.filter((game) => game.rating === filters.rating);
-            }
+        //     return {
+        //         ...state,
+        //         allVideogames: filteredResult,
+        //         currentPageNumber: 0, 
+        //         filters:false
+        //     }
 
-            // Filtrar por origen
-            if (filters.source && filters.source !== 'all') {
-                if (filters.source === 'API') {
-                    filteredResult = filteredResult.filter((game) => !game.createdDB);
-                } else if (filters.source === 'DB') {
-                    filteredResult = filteredResult.filter((game) => game.createdDB);
+        case FILTER_BY_GENRE: {
+            const allVideogames = state.filters ? [...state.videogamesFiltered] : [...state.allVideogamesBackUp];
+
+            const filteredByGenre = allVideogames.filter((videogame) => videogame.genres.includes(action.payload));
+
+            if(!filteredByGenre.length) {
+                return {
+                    ...state
                 }
             }
 
             return {
                 ...state,
-                allVideogames: filteredResult,
-                currentPageNumber: 0, 
-                filters:false
+                videogames: [...filteredByGenre].splice(0, cardsPerPage),
+                videogamesFiltered: filteredByGenre,
+                currentPageNumber: 0,
+                filters: true
             }
+        }
+
+        case FILTER_BY_CREATION: {
+
+            let allVideogames = [...state.allVideogamesBackUp];
+
+            let filteredByCreation;
+        
+            if (action.payload === 'created') {
+                filteredByCreation = allVideogames.filter((videogame) => typeof videogame.id === 'string');
+                
+                if(!filteredByCreation.length) {
+                    return {
+                        ...state
+                    }
+                }
+            }
+        
+            if (action.payload === 'available') {
+                filteredByCreation = allVideogames.filter((videogame) => typeof videogame.id === 'number');
+            }
+
+            if(action.payload === 'all') {
+                filteredByCreation = allVideogames;
+            }
+        
+            return {
+                ...state,
+                allVideogames: [...filteredByCreation].splice(0, cardsPerPage),
+                videogamesFiltered: filteredByCreation,
+                currentPageNumber: 0,
+                filters: true
+            }
+
+        }
+
+        case ORDER_BY_NAME: {
+            const allVideogames = state.filters ? [...state.videogamesFiltered] : [...state.allVideogamesBackUp];
+
+            let orderName;
+
+            if (action.payload === 'ascending') {
+                orderName = allVideogames.sort((a, b) => (a.name > b.name) ? 1 : -1);
+            }
+        
+            if (action.payload === 'descending') {
+                orderName = allVideogames.sort((a, b) => (a.name < b.name) ? 1 : -1);
+            }
+
+            return {
+                ...state,
+                allVideogames: [...orderName].splice(0, cardsPerPage),
+                videogamesFiltered: orderName,
+                currentPageNumber: 0,
+                filters: true          
+            }
+        }
+
+        case ORDER_BY_RATING: {
+            const allVideogames = state.filters ? [...state.videogamesFiltered] : [...state.videogamesBackUp];
+
+            let orderRating;
+
+            if(action.payload === 'ascending') {
+                orderRating = allVideogames.sort((a, b) => a.rating - b.rating);
+            }
+
+            if(action.payload === 'descending') {
+                orderRating = allVideogames.sort((a, b) => b.rating - a.rating);
+            }
+
+            return {
+                ...state,
+                allVideogames: [...orderRating].splice(0, cardsPerPage),
+                videogamesFiltered: orderRating,
+                currentPageNumber: 0,
+                filters: true,         
+            }
+        }
+
 
         case RESET:
             return {

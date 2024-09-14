@@ -1,4 +1,3 @@
-// PaginationContext.jsx
 import React, { createContext, useContext, useState } from 'react';
 
 const PaginationContext = createContext();

@@ -23,6 +23,12 @@
     background:#847a7ab8 ;
 }
 
+.navBar_buttons {
+    grid-area: navigation;
+    justify-self: end;
+    display: flex; 
+    align-items: center;
+}
 .imageLogo img {
     width: 100px; /* Ajusta el valor según tus necesidades */
     height: auto; /* Esto asegura que la altura se ajuste automáticamente según las proporciones originales */

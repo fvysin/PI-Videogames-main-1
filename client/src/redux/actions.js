@@ -1,4 +1,4 @@
-import { CLEAR_DETAIL, GET_DETAIL, GET_VIDEOGAMES, GET_BY_NAME, POST_VIDEOGAME, GET_GENRES, FILTER, RESET, PAGINATE, RESET_PAGE } from "./actions-type"
+import { CLEAR_DETAIL, GET_DETAIL, GET_VIDEOGAMES, GET_BY_NAME, POST_VIDEOGAME, GET_GENRES, FILTER, RESET, PAGINATE, RESET_PAGE, FILTER_BY_CREATION, FILTER_BY_GENRE, ORDER_BY_NAME, ORDER_BY_RATING } from "./actions-type"
 import axios from 'axios'
 
 export const  allVideogames = () => {
@@ -101,7 +101,7 @@ export const  resetVideogames = () => {
     }
 }
 
-export function page (order){
+export function paginate (order){
     return function (dispatch){
            dispatch({
                 type:PAGINATE,
@@ -114,3 +114,37 @@ export function page (order){
     export const resetPage = () => ({
         type: RESET_PAGE,
     });
+
+
+
+
+
+
+
+    export const filterByGenre = (genre) => {
+        return {
+            type: FILTER_BY_GENRE,
+            payload: genre
+        }
+    }
+    
+    export const filterByCreation = (created) => {
+        return {
+            type: FILTER_BY_CREATION,
+            payload: created
+        }
+    }
+    
+    export const orderByName = (order) => {
+        return {
+            type: ORDER_BY_NAME,
+            payload: order
+        }
+    }
+    
+    export const orderByRating = (order) => {
+        return {
+            type: ORDER_BY_RATING,
+            payload: order
+        }
+    }

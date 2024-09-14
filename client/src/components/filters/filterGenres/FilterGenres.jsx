@@ -7,14 +7,15 @@ const FilterGenres = () => {
     const dispatch = useDispatch()
     const [select, setSelect] = useState('all')
 
+    const allGenres = useSelector(state => state.allGenres)
+
     useEffect(() => {
         dispatch(getAllGenres())
         setSelect('all')
     }, [dispatch])
 
-    const allGenres = useSelector(state => state.allGenres)
 
-    const handlerFilter = (event) => {
+    const handleFilter = (event) => {
         setSelect(event.target.value);
         dispatch(updateFilter('genre', event.target.value));
     }
@@ -23,7 +24,7 @@ const FilterGenres = () => {
     return (
         <div className='container'>
             {console.log(select)} 
-            <select name="genres" id="genres" onChange={handlerFilter} value={select}>
+            <select name="genres" id="genres" onChange={handleFilter} value={select}>
                 
             <option value="all">Género</option>
                 {allGenres.map(temp => <option key={temp} value={temp}>{temp}</option>)}
